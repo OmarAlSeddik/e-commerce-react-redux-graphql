@@ -1,5 +1,26 @@
+import { createGlobalStyle, css } from "styled-components";
 import Header from "./components/Header";
-import GlobalStyles from "./components/styles/GlobalStyles";
+
+const GlobalStyles = createGlobalStyle`${css`
+  @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
+  :root {
+    --c-primary: #5ece7b;
+    --c-text: #1d1f22;
+  }
+
+  * {
+    font-family: "Raleway", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  body {
+    min-height: 100vh;
+  }
+`}`;
 
 function App() {
   return (
