@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`${css`
   body {
     min-height: 100vh;
     background-color: #fff;
+    overflow: hidden;
   }
 `}`;
 

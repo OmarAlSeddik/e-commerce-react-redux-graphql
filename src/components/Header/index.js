@@ -12,6 +12,9 @@ const StyledHeader = styled.header`
   height: 5rem;
   width: 100%;
   padding: 0 5%;
+  box-shadow: 0 0.1rem 0.2rem #0004;
+  background-color: #fff;
+  z-index: 1;
 `;
 
 const Header = () => {
