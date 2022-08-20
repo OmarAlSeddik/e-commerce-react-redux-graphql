@@ -5,7 +5,6 @@ import Logo from "./Logo";
 import Nav from "./Nav";
 
 const StyledHeader = styled.header`
-  position: absolute;
   display: flex;
   align-items: center;
   gap: 1.375rem;
