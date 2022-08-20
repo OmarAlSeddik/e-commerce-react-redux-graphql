@@ -6,12 +6,12 @@ import Nav from "./Nav";
 
 const StyledHeader = styled.header`
   position: absolute;
-  top: 0;
-  left: 0;
   display: flex;
   align-items: center;
+  gap: 1.375rem;
   height: 5rem;
   width: 100%;
+  padding: 0 5%;
 `;
 
 const Header = () => {

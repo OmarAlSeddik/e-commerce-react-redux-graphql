@@ -2,7 +2,7 @@ import { createGlobalStyle, css } from "styled-components";
 import Header from "./components/Header";
 
 const GlobalStyles = createGlobalStyle`${css`
-  @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap");
 
   :root {
     --c-primary: #5ece7b;
@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`${css`
 
   body {
     min-height: 100vh;
+    background-color: #fff;
   }
 `}`;
 
