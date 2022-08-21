@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { categoryReducer as category } from "./categorySlice";
 import { currencyReducer as currency } from "./currencySlice";
 
 import {
@@ -18,7 +19,7 @@ const persistConfig = {
   storage,
 };
 
-const combinedReducer = combineReducers({ currency });
+const combinedReducer = combineReducers({ currency, category });
 const persistedReducer = persistReducer(persistConfig, combinedReducer);
 
 const store = configureStore({
