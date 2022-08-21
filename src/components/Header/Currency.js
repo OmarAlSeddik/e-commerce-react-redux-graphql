@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { currencyActions } from "../../store/currencySlice";
 
 const StyledCurrency = styled.button`
   position: relative;
@@ -63,29 +65,19 @@ const StyledCurrency = styled.button`
 `;
 
 const Currency = () => {
+  const dispatch = useDispatch();
+  const currency = useSelector((state) => state.currency.currency);
+
   const [isShown, setIsShown] = useState(false);
-  const [optionSelected, setOptionSelected] = useState(2);
 
   const handleCurrencyClick = () => {
     setIsShown(!isShown);
   };
 
-  const handleSelectionClick = (value) => {
-    setOptionSelected(value);
-  };
-
-  const displayedSymbol = () => {
-    if (optionSelected === 1) return "$";
-
-    if (optionSelected === 2) return "€";
-
-    if (optionSelected === 3) return "¥";
-  };
-
   return (
     <StyledCurrency>
       <div className="currency-container" onClick={handleCurrencyClick}>
-        <div className="currency-icon">{displayedSymbol()}</div>
+        <div className="currency-icon">{currency}</div>
         <svg
           className={`caret ${isShown ? "caret-up" : "caret-down"}`}
           width="8"
@@ -105,26 +97,26 @@ const Currency = () => {
 
       <div className={`currency-options ${isShown ? "show" : ""}`}>
         <div
-          onClick={() => handleSelectionClick(1)}
-          className={`currency-option ${
-            optionSelected === 1 ? "selected" : ""
-          }`}
+          onClick={() => {
+            dispatch(currencyActions.changeCurrency("$"));
+          }}
+          className={`currency-option ${currency === "$" ? "selected" : ""}`}
         >
           $ USD
         </div>
         <div
-          onClick={() => handleSelectionClick(2)}
-          className={`currency-option ${
-            optionSelected === 2 ? "selected" : ""
-          }`}
+          onClick={() => {
+            dispatch(currencyActions.changeCurrency("€"));
+          }}
+          className={`currency-option ${currency === "€" ? "selected" : ""}`}
         >
           € EUR
         </div>
         <div
-          onClick={() => handleSelectionClick(3)}
-          className={`currency-option ${
-            optionSelected === 3 ? "selected" : ""
-          }`}
+          onClick={() => {
+            dispatch(currencyActions.changeCurrency("¥"));
+          }}
+          className={`currency-option ${currency === "¥" ? "selected" : ""}`}
         >
           ¥ JPY
         </div>
