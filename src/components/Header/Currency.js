@@ -66,17 +66,22 @@ const StyledCurrency = styled.button`
 
 const Currency = () => {
   const dispatch = useDispatch();
-  const currency = useSelector((state) => state.currency.currency);
+  const currency = useSelector((state) => state.currency.value);
 
   const [isShown, setIsShown] = useState(false);
 
-  const handleCurrencyClick = () => {
+  const handleContainerClick = () => {
+    setIsShown(!isShown);
+  };
+
+  const handleOptionClick = (value) => {
+    dispatch(currencyActions.changeCurrency(value));
     setIsShown(!isShown);
   };
 
   return (
     <StyledCurrency>
-      <div className="currency-container" onClick={handleCurrencyClick}>
+      <div className="currency-container" onClick={handleContainerClick}>
         <div className="currency-icon">{currency}</div>
         <svg
           className={`caret ${isShown ? "caret-up" : "caret-down"}`}
@@ -94,11 +99,10 @@ const Currency = () => {
           />
         </svg>
       </div>
-
       <div className={`currency-options ${isShown ? "show" : ""}`}>
         <div
           onClick={() => {
-            dispatch(currencyActions.changeCurrency("$"));
+            handleOptionClick("$");
           }}
           className={`currency-option ${currency === "$" ? "selected" : ""}`}
         >
@@ -106,7 +110,7 @@ const Currency = () => {
         </div>
         <div
           onClick={() => {
-            dispatch(currencyActions.changeCurrency("€"));
+            handleOptionClick("€");
           }}
           className={`currency-option ${currency === "€" ? "selected" : ""}`}
         >
@@ -114,7 +118,7 @@ const Currency = () => {
         </div>
         <div
           onClick={() => {
-            dispatch(currencyActions.changeCurrency("¥"));
+            handleOptionClick("¥");
           }}
           className={`currency-option ${currency === "¥" ? "selected" : ""}`}
         >
