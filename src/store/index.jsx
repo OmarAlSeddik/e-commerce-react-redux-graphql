@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { categoryReducer as category } from "./categorySlice";
 import { currencyReducer as currency } from "./currencySlice";
+import { dataReducer as data } from "./dataSlice";
 
 import {
   FLUSH,
@@ -19,7 +20,7 @@ const persistConfig = {
   storage,
 };
 
-const combinedReducer = combineReducers({ currency, category });
+const combinedReducer = combineReducers({ currency, category, data });
 const persistedReducer = persistReducer(persistConfig, combinedReducer);
 
 const store = configureStore({

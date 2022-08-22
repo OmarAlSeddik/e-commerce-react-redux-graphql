@@ -17,6 +17,8 @@ const StyledNav = styled.nav`
     cursor: pointer;
     color: var(--c-text);
     text-align: center;
+    font-weight: 400;
+    transition: color 0.2s, font-weight 0.2s;
   }
 
   .item.active {
