@@ -51,7 +51,7 @@ const StyledNav = styled.nav`
 
 const Nav = () => {
   const dispatch = useDispatch();
-  const category = useSelector((state) => state.category.value);
+  const category = useSelector((state) => state.category);
 
   const handleClick = (value) => {
     dispatch(categoryActions.changeCategory(value));
@@ -61,23 +61,23 @@ const Nav = () => {
     <StyledNav>
       <div
         onClick={() => handleClick(1)}
-        className={`item ${category === 1 ? "active" : ""}`}
+        className={`item ${category.value === 1 ? "active" : ""}`}
       >
-        WOMEN
+        ALL
       </div>
       <div
         onClick={() => handleClick(2)}
-        className={`item ${category === 2 ? "active" : ""}`}
+        className={`item ${category.value === 2 ? "active" : ""}`}
       >
-        MEN
+        TECH
       </div>
       <div
         onClick={() => handleClick(3)}
-        className={`item ${category === 3 ? "active" : ""}`}
+        className={`item ${category.value === 3 ? "active" : ""}`}
       >
-        KIDS
+        CLOTHES
       </div>
-      <div className={`indicator indicator-${category}`} />
+      <div className={`indicator indicator-${category.value}`} />
     </StyledNav>
   );
 };

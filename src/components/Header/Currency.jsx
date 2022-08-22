@@ -14,7 +14,7 @@ const StyledCurrency = styled.button`
     cursor: pointer;
   }
 
-  .currency-icon {
+  .currency-symbol {
     font-size: 1.125rem;
     font-weight: 500;
     line-height: 160%;
@@ -68,6 +68,26 @@ const Currency = () => {
   const dispatch = useDispatch();
   const currency = useSelector((state) => state.currency);
 
+  const currencyItems = [
+    { label: "USD", symbol: "$" },
+    {
+      label: "GBP",
+      symbol: "£",
+    },
+    {
+      label: "AUD",
+      symbol: "A$",
+    },
+    {
+      label: "JPY",
+      symbol: "¥",
+    },
+    {
+      label: "RUB",
+      symbol: "₽",
+    },
+  ];
+
   const [isShown, setIsShown] = useState(false);
 
   const handleContainerClick = () => {
@@ -79,10 +99,24 @@ const Currency = () => {
     setIsShown(!isShown);
   };
 
+  const currencyOptions = currencyItems.map((currencyItem, i) => {
+    return (
+      <div
+        key={i}
+        onClick={() => {
+          handleOptionClick(i);
+        }}
+        className={`currency-option ${currency.value === i ? "selected" : ""}`}
+      >
+        {currencyItem.symbol} {currencyItem.label}
+      </div>
+    );
+  });
+
   return (
     <StyledCurrency>
       <div className="currency-container" onClick={handleContainerClick}>
-        <div className="currency-icon">{currency.symbol}</div>
+        <div className="currency-symbol">{currency.symbol}</div>
         <svg
           className={`caret ${isShown ? "caret-up" : "caret-down"}`}
           width="8"
@@ -100,36 +134,7 @@ const Currency = () => {
         </svg>
       </div>
       <div className={`currency-options ${isShown ? "show" : ""}`}>
-        <div
-          onClick={() => {
-            handleOptionClick(1);
-          }}
-          className={`currency-option ${
-            currency.value === 1 ? "selected" : ""
-          }`}
-        >
-          $ USD
-        </div>
-        <div
-          onClick={() => {
-            handleOptionClick(2);
-          }}
-          className={`currency-option ${
-            currency.value === 2 ? "selected" : ""
-          }`}
-        >
-          € EUR
-        </div>
-        <div
-          onClick={() => {
-            handleOptionClick(3);
-          }}
-          className={`currency-option ${
-            currency.value === 3 ? "selected" : ""
-          }`}
-        >
-          ¥ JPY
-        </div>
+        {currencyOptions}
       </div>
     </StyledCurrency>
   );

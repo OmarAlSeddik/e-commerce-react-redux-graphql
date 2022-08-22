@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { value: 1 };
+const initialState = { value: 1, string: "all" };
 
 const categorySlice = createSlice({
   name: "category",
@@ -8,6 +8,9 @@ const categorySlice = createSlice({
   reducers: {
     changeCategory(state, action) {
       state.value = action.payload;
+      if (state.value === 1) state.string = "all";
+      if (state.value === 2) state.string = "tech";
+      if (state.value === 3) state.string = "clothes";
     },
   },
 });

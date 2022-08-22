@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { value: 2, symbol: "€" };
+const initialState = { value: 0, symbol: "$", label: "USD" };
 
 const currencySlice = createSlice({
   name: "currency",
@@ -8,9 +8,37 @@ const currencySlice = createSlice({
   reducers: {
     changeCurrency(state, action) {
       state.value = action.payload;
-      if (state.value === 1) state.symbol = "$";
-      if (state.value === 2) state.symbol = "€";
-      if (state.value === 3) state.symbol = "¥";
+      switch (state.value) {
+        case 0: {
+          state.symbol = "$";
+          state.label = "USD";
+          break;
+        }
+        case 1: {
+          state.symbol = "£";
+          state.label = "GBP";
+          break;
+        }
+        case 2: {
+          state.symbol = "A$";
+          state.label = "AUD";
+          break;
+        }
+        case 3: {
+          state.symbol = "¥";
+          state.label = "JPY";
+          break;
+        }
+        case 4: {
+          state.symbol = "₽";
+          state.label = "RUB";
+          break;
+        }
+        default: {
+          state.symbol = "$";
+          state.label = "USD";
+        }
+      }
     },
   },
 });

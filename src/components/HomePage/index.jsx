@@ -1,28 +1,16 @@
-import { gql, useQuery } from "@apollo/client";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getData } from "../../store/dataSlice";
+import { useSelector } from "react-redux";
+import useProducts from "../hooks/useProducts";
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+  const category = useSelector((state) => state.category);
 
-  useEffect(() => {
-    dispatch(getData());
-  }, [dispatch]);
+  const { loading, data, error } = useProducts(category.string);
 
-  const GET_CURRENCIES = gql`
-    query {
-      currencies {
-        label
-      }
-    }
-  `;
+  if (loading) return <h1>Loading...</h1>;
 
-  const { loading, data, error } = useQuery(GET_CURRENCIES);
+  if (error) return <h1>Error...</h1>;
 
-  if (data) console.log(data.currencies[0].label);
-
-  return <h1>{data.currencies[0].label}</h1>;
+  return <h1>{data.category.name}</h1>;
 };
 
 export default HomePage;
