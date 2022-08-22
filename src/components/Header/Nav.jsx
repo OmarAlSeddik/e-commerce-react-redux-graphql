@@ -7,7 +7,7 @@ const StyledNav = styled.nav`
   height: 100%;
   display: flex;
   align-items: center;
-  width: 20rem;
+  width: 21rem;
   margin-right: auto;
 
   .item {
@@ -16,9 +16,18 @@ const StyledNav = styled.nav`
     line-height: 1.2rem;
     cursor: pointer;
     color: var(--c-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     text-align: center;
     font-weight: 400;
     transition: color 0.2s, font-weight 0.2s;
+    text-transform: uppercase;
+  }
+
+  .item:hover {
+    color: var(--c-primary);
   }
 
   .item.active {
@@ -36,15 +45,15 @@ const StyledNav = styled.nav`
     transition: left 0.2s;
   }
 
-  .indicator-1 {
+  .indicator-0 {
     left: 0;
   }
 
-  .indicator-2 {
+  .indicator-1 {
     left: 33.333%;
   }
 
-  .indicator-3 {
+  .indicator-2 {
     left: 66.667%;
   }
 `;
@@ -57,26 +66,23 @@ const Nav = () => {
     dispatch(categoryActions.changeCategory(value));
   };
 
+  const navItems = ["all", "tech", "clothes"];
+
+  const navOptions = navItems.map((navItem, i) => {
+    return (
+      <div
+        key={i}
+        onClick={() => handleClick(i)}
+        className={`item ${category.value === i ? "active" : ""}`}
+      >
+        {navItem}
+      </div>
+    );
+  });
+
   return (
     <StyledNav>
-      <div
-        onClick={() => handleClick(1)}
-        className={`item ${category.value === 1 ? "active" : ""}`}
-      >
-        ALL
-      </div>
-      <div
-        onClick={() => handleClick(2)}
-        className={`item ${category.value === 2 ? "active" : ""}`}
-      >
-        TECH
-      </div>
-      <div
-        onClick={() => handleClick(3)}
-        className={`item ${category.value === 3 ? "active" : ""}`}
-      >
-        CLOTHES
-      </div>
+      {navOptions}
       <div className={`indicator indicator-${category.value}`} />
     </StyledNav>
   );

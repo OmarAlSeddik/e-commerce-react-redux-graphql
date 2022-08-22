@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`${css`
   :root {
     --c-primary: #5ece7b;
     --c-text: #1d1f22;
+    --c-gray-light: #eee;
   }
 
   * {

@@ -1,8 +1,18 @@
 import styled from "styled-components";
 
 const StyledCart = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: white;
+  padding: 1rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
   cursor: pointer;
+
+  &:hover {
+    background-color: var(--c-gray-light);
+  }
 
   .cart-icon {
     width: 1.25rem;

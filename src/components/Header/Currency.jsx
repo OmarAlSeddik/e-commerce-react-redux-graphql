@@ -5,13 +5,21 @@ import { currencyActions } from "../../store/currencySlice";
 
 const StyledCurrency = styled.button`
   position: relative;
+  background-color: #fff;
 
   .currency-container {
     display: flex;
     align-items: center;
     gap: 0.625rem;
-    background-color: #fff;
     cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    background-color: #fff;
+  }
+
+  .currency-container:hover {
+    background-color: var(--c-gray-light);
   }
 
   .currency-symbol {
@@ -36,7 +44,7 @@ const StyledCurrency = styled.button`
 
   .currency-options {
     position: absolute;
-    top: 100%;
+    top: 75%;
     left: 0%;
     transform: translateX(-25%);
     width: 7.125rem;
@@ -55,7 +63,7 @@ const StyledCurrency = styled.button`
   .currency-option {
     font-size: 1.125rem;
     font-weight: 500;
-    padding: 0.5rem 2.375rem 0.5rem 1.25rem;
+    padding: 0.5rem 1.5rem;
     cursor: pointer;
   }
 
