@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import HomePage from "./components/HomePage";
 
 const GlobalStyles = createGlobalStyle`${css`
-  @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap");
 
   :root {
     --c-primary: #5ece7b;
@@ -24,7 +24,6 @@ const GlobalStyles = createGlobalStyle`${css`
   body {
     min-height: 100vh;
     background-color: #fff;
-    overflow: hidden;
   }
 `}`;
 
