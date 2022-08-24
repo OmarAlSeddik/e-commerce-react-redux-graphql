@@ -22,7 +22,7 @@ const GlobalStyles = createGlobalStyle`${css`
   }
 
   body {
-    min-height: 100vh;
+    /* min-height: 100vh; */
     background-color: #fff;
   }
 `}`;
@@ -34,7 +34,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/cart-page" element={<CartPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
     </div>
   );

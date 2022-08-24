@@ -3,30 +3,39 @@ import styled from "styled-components";
 import useProducts from "../hooks/useProducts";
 
 const StyledPage = styled.div`
-  margin: 5rem;
+  margin: 5rem 5%;
 
   .category-name {
     text-transform: capitalize;
-    padding: 5rem 0;
+    padding: 2rem 0;
   }
 
   .products-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 95rem) {
+    .products-container {
+      justify-content: center;
+    }
   }
 
   .product-container {
+    width: 20rem;
+    height: 20rem;
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     cursor: pointer;
     padding: 1rem;
     transition: box-shadow 0.2s;
   }
 
   .product-container:hover {
-    box-shadow: 0 0.25rem 2.1875rem rgba(168, 172, 176, 0.19);
+    box-shadow: 0 0.25rem 2.1875rem #0004;
   }
 
   .product-container.out-of-stock {
@@ -40,7 +49,7 @@ const StyledPage = styled.div`
     font-size: 1.5rem;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-25%, -75%);
     line-height: 160%;
   }
 
@@ -49,8 +58,7 @@ const StyledPage = styled.div`
   }
 
   .product-image {
-    width: 20rem;
-    height: 20rem;
+    height: 70%;
     align-self: center;
   }
 
@@ -58,7 +66,6 @@ const StyledPage = styled.div`
     font-weight: 300;
     line-height: 160%;
     font-size: 1.125rem;
-    margin-top: 1.3125rem;
   }
 
   .product-price {
@@ -84,16 +91,16 @@ const HomePage = () => {
       >
         <div className="stock-text">OUT OF STOCK</div>
         <img className="product-image" src={product.gallery[0]} alt="Product" />
-        <div className="product-name">{product.name}</div>
-        <div className="product-price">
-          {currency.symbol}
-          {product.prices[currency.value].amount.toFixed(2)}
+        <div className="product-details-container">
+          <div className="product-name">{product.name}</div>
+          <div className="product-price">
+            {currency.symbol}
+            {product.prices[currency.value].amount.toFixed(2)}
+          </div>
         </div>
       </div>
     );
   });
-
-  console.log(products[0].inStock);
 
   return (
     <StyledPage>
