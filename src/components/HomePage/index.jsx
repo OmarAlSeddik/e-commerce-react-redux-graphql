@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { cartActions } from "../../store/cartSlice";
 import useProducts from "../hooks/useProducts";
 
 const StyledPage = styled.div`
@@ -102,6 +103,11 @@ const StyledPage = styled.div`
 `;
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const addToCart = (id) => {
+    dispatch(cartActions.addToCart(id));
+  };
+
   const currency = useSelector((state) => state.currency);
   const category = useSelector((state) => state.category);
   const { productsLoading, productsData, productsError } = useProducts(
@@ -111,14 +117,14 @@ const HomePage = () => {
   if (productsError) return <h1>Error...</h1>;
   const products = productsData.category.products;
 
-  const renderedProducts = products.map((product, i) => {
+  const renderedProducts = products.map((product) => {
     return (
       <div
         className={`product-container ${product.inStock ? "" : "out-of-stock"}`}
         key={product.id}
       >
         <div className="stock-text">OUT OF STOCK</div>
-        <div className="cart-button">
+        <div className="cart-button" onClick={() => addToCart(product.id)}>
           <svg
             className="cart-icon"
             viewBox="0 0 20 19"

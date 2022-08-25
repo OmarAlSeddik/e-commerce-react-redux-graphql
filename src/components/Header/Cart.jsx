@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const StyledCart = styled.button`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,11 +20,31 @@ const StyledCart = styled.button`
     width: 1.25rem;
     height: 1.1875rem;
   }
+
+  .counter {
+    font-size: 0.75rem;
+    padding: 0.75em;
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(0%, -100%);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <StyledCart>
+      <div className="counter">{cart.quantity}</div>
       <svg
         className="cart-icon"
         viewBox="0 0 20 19"
