@@ -6,6 +6,7 @@ const useProducts = (category) => {
       category(input: { title: "${category}" }) {
         name
         products {
+          id
           name
           inStock
           gallery
@@ -19,7 +20,11 @@ const useProducts = (category) => {
 
   const { loading, data, error } = useQuery(GET_PRODUCTS);
 
-  return { loading, data, error };
+  const productsLoading = loading;
+  const productsData = data;
+  const productsError = error;
+
+  return { productsLoading, productsData, productsError };
 };
 
 export default useProducts;
