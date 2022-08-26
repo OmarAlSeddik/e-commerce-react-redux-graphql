@@ -36,7 +36,7 @@ const StyledPage = styled.div`
   }
 
   .product-container:hover {
-    box-shadow: 0 0.25rem 2.1875rem #0004;
+    box-shadow: var(--box-shadow-product);
   }
 
   .cart-button {

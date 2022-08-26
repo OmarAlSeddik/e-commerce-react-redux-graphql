@@ -42,6 +42,10 @@ const StyledCart = styled.button`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
 
+  for (const [key, value] of Object.entries(cart.items)) {
+    console.log(key, value);
+  }
+
   return (
     <StyledCart>
       <div className="counter">{cart.quantity}</div>

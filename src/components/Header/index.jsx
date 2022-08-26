@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Cart from "./Cart";
+import CartMenu from "./CartMenu";
 import Currency from "./Currency";
 import Logo from "./Logo";
 import Nav from "./Nav";
@@ -14,7 +15,7 @@ const StyledHeader = styled.header`
   height: 5rem;
   width: 100%;
   padding: 0 5%;
-  box-shadow: 0 0.1rem 0.2rem #0004;
+  box-shadow: var(--box-shadow);
   background-color: #fff;
   z-index: 1;
 `;
@@ -26,6 +27,7 @@ const Header = () => {
       <Logo />
       <Currency />
       <Cart />
+      <CartMenu />
     </StyledHeader>
   );
 };

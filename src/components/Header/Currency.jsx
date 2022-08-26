@@ -51,7 +51,7 @@ const StyledCurrency = styled.button`
     margin-top: 0.5rem;
     display: none;
     flex-direction: column;
-    box-shadow: 0 0.1rem 0.2rem #0004;
+    box-shadow: var(--box-shadow);
     background-color: #fff;
     transition: transform 0.2s;
   }

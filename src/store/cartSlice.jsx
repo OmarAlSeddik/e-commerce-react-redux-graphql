@@ -20,7 +20,8 @@ const cartSlice = createSlice({
       if (state.items[action.payload] === 0) delete state[action.payload];
     },
     // For debugging purposes only
-    resetState(state) {
+    resetState(state, action) {
+      console.log(action);
       state.items = {};
       state.quantity = 0;
     },
