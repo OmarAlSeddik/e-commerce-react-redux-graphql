@@ -13,6 +13,10 @@ const StyledCartMenu = styled.div`
   padding: 2rem 1rem;
   gap: 2rem;
 
+  .hidden {
+    display: none;
+  }
+
   .buttons-container {
     display: flex;
     gap: 0.75rem;
@@ -50,15 +54,16 @@ const StyledCartMenu = styled.div`
   }
 `;
 
-const CartMenu = () => {
+const CartMenu = (props) => {
+  const cartMenuOpen = props.cartMenuOpen;
   const currency = useSelector((state) => state.currency);
   const cart = useSelector((state) => state.cart);
   let totalCost = 0;
 
-  const renderedItems = <div>Hello There!</div>;
+  const renderedItems = <div></div>;
 
   return (
-    <StyledCartMenu>
+    <StyledCartMenu style={cartMenuOpen ? {} : { display: "none" }}>
       <div className="quantity-container">
         <b>My Bag,</b> {cart.quantity} items
       </div>

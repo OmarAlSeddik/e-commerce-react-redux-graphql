@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { cartActions } from "../../store/cartSlice";
 import useProducts from "../hooks/useProducts";
@@ -104,9 +105,7 @@ const StyledPage = styled.div`
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const addToCart = (id) => {
-    dispatch(cartActions.addToCart(id));
-  };
+  const addToCart = (id) => dispatch(cartActions.addToCart(id));
 
   const currency = useSelector((state) => state.currency);
   const category = useSelector((state) => state.category);
@@ -119,7 +118,8 @@ const HomePage = () => {
 
   const renderedProducts = products.map((product) => {
     return (
-      <div
+      <Link
+        to={`/${product.id}`}
         className={`product-container ${product.inStock ? "" : "out-of-stock"}`}
         key={product.id}
       >
@@ -152,7 +152,7 @@ const HomePage = () => {
             {product.prices[currency.value].amount.toFixed(2)}
           </div>
         </div>
-      </div>
+      </Link>
     );
   });
 

@@ -39,15 +39,12 @@ const StyledCart = styled.button`
   }
 `;
 
-const Cart = () => {
+const Cart = (props) => {
+  const handleToggleCartMenu = props.handleToggleCartMenu;
   const cart = useSelector((state) => state.cart);
 
-  for (const [key, value] of Object.entries(cart.items)) {
-    console.log(key, value);
-  }
-
   return (
-    <StyledCart>
+    <StyledCart onClick={handleToggleCartMenu}>
       <div className="counter">{cart.quantity}</div>
       <svg
         className="cart-icon"

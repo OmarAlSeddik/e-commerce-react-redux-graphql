@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Cart from "./Cart";
 import CartMenu from "./CartMenu";
@@ -21,13 +22,19 @@ const StyledHeader = styled.header`
 `;
 
 const Header = () => {
+  const [cartMenuOpen, setCartMenuOpen] = useState(false);
+
+  const handleToggleCartMenu = () => {
+    setCartMenuOpen((previous) => !previous);
+  };
+
   return (
     <StyledHeader>
       <Nav />
       <Logo />
       <Currency />
-      <Cart />
-      <CartMenu />
+      <Cart handleToggleCartMenu={handleToggleCartMenu} />
+      <CartMenu cartMenuOpen={cartMenuOpen} />
     </StyledHeader>
   );
 };

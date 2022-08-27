@@ -29,6 +29,10 @@ const GlobalStyles = createGlobalStyle`${css`
   body {
     min-height: 90vh;
   }
+
+  a {
+    all: unset;
+  }
 `}`;
 
 function App() {

@@ -44,11 +44,10 @@ const StyledCurrency = styled.button`
 
   .currency-options {
     position: absolute;
-    top: 75%;
+    top: 100%;
     left: 0%;
     transform: translateX(-25%);
     width: 7.125rem;
-    margin-top: 0.5rem;
     display: none;
     flex-direction: column;
     box-shadow: var(--box-shadow);
