@@ -7,11 +7,16 @@ const useProducts = (category) => {
         name
         products {
           id
+          brand
           name
           inStock
           gallery
           prices {
             amount
+          }
+          attributes {
+            name
+            type
           }
         }
       }

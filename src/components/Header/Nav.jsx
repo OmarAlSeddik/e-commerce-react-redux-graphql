@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { categoryActions } from "../../store/categorySlice";
 
@@ -42,7 +43,7 @@ const StyledNav = styled.nav`
     height: 2px;
     bottom: 0;
     background-color: var(--c-primary);
-    transition: left 0.2s;
+    transition: left 0.2s 0.2s, height 0.2s;
   }
 
   .indicator-0 {
@@ -56,11 +57,16 @@ const StyledNav = styled.nav`
   .indicator-2 {
     left: 66.667%;
   }
+
+  .indicator-inactive {
+    height: 0;
+  }
 `;
 
 const Nav = () => {
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
+  const { pathname } = useLocation();
 
   const handleClick = (value) => {
     dispatch(categoryActions.changeCategory(value));
@@ -70,20 +76,27 @@ const Nav = () => {
 
   const navOptions = navItems.map((navItem, i) => {
     return (
-      <div
+      <Link
+        to="/"
         key={i}
         onClick={() => handleClick(i)}
-        className={`item ${category.value === i ? "active" : ""}`}
+        className={`item ${
+          category.value === i && pathname === "/" ? "active" : ""
+        }`}
       >
         {navItem}
-      </div>
+      </Link>
     );
   });
 
   return (
     <StyledNav>
       {navOptions}
-      <div className={`indicator indicator-${category.value}`} />
+      <div
+        className={`indicator indicator-${category.value} ${
+          pathname === "/" ? "" : "indicator-inactive"
+        }`}
+      />
     </StyledNav>
   );
 };

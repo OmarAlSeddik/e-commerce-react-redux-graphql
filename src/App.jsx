@@ -3,6 +3,8 @@ import { createGlobalStyle, css } from "styled-components";
 import CartPage from "./components/CartPage";
 import Header from "./components/Header";
 import HomePage from "./components/HomePage";
+import NotFoundPage from "./components/NotFoundPage";
+import ProductPage from "./components/ProductPage";
 
 const GlobalStyles = createGlobalStyle`${css`
   @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap");
@@ -26,23 +28,30 @@ const GlobalStyles = createGlobalStyle`${css`
     border: none;
   }
 
-  body {
-    min-height: 90vh;
-  }
-
   a {
     all: unset;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    min-height: 100vh;
   }
 `}`;
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <GlobalStyles />
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/:id" element={<ProductPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );

@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import useProducts from "../../hooks/useProducts";
 import { cartActions } from "../../store/cartSlice";
-import useProducts from "../hooks/useProducts";
 
 const StyledPage = styled.div`
-  margin: 5rem 5%;
+  padding: 5rem 5%;
 
   .category-name {
     text-transform: capitalize;
@@ -18,7 +18,7 @@ const StyledPage = styled.div`
     gap: 1rem;
   }
 
-  @media (max-width: 95rem) {
+  @media (max-width: 1475px) {
     .products-container {
       justify-content: center;
     }
@@ -33,7 +33,6 @@ const StyledPage = styled.div`
     justify-content: space-between;
     padding: 1rem;
     transition: box-shadow 0.2s;
-    cursor: pointer;
   }
 
   .product-container:hover {
@@ -52,6 +51,7 @@ const StyledPage = styled.div`
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.2s, transform 0.2s;
+    cursor: pointer;
   }
 
   .cart-button:hover {
@@ -86,20 +86,29 @@ const StyledPage = styled.div`
     display: inline;
   }
 
-  .product-image {
+  .image-container {
     height: 70%;
     align-self: center;
+    cursor: pointer;
+  }
+
+  .product-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .product-name {
     font-weight: 300;
     line-height: 160%;
     font-size: 1.125rem;
+    cursor: pointer;
   }
 
   .product-price {
     line-height: 160%;
     font-size: 1.125rem;
+    cursor: pointer;
   }
 `;
 
@@ -118,8 +127,7 @@ const HomePage = () => {
 
   const renderedProducts = products.map((product) => {
     return (
-      <Link
-        to={`/${product.id}`}
+      <div
         className={`product-container ${product.inStock ? "" : "out-of-stock"}`}
         key={product.id}
       >
@@ -144,15 +152,23 @@ const HomePage = () => {
             />
           </svg>
         </div>
-        <img className="product-image" src={product.gallery[0]} alt="Product" />
+        <Link to={`/${product.id}`} className="image-container">
+          <img
+            className="product-image"
+            src={product.gallery[0]}
+            alt="Product"
+          />
+        </Link>
         <div className="product-details-container">
-          <div className="product-name">{product.name}</div>
-          <div className="product-price">
+          <Link to={`/${product.id}`} className="product-name">
+            {product.brand} {product.name}
+          </Link>
+          <Link to={`/${product.id}`} className="product-price">
             {currency.symbol}
             {product.prices[currency.value].amount.toFixed(2)}
-          </div>
+          </Link>
         </div>
-      </Link>
+      </div>
     );
   });
 
