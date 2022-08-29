@@ -7,12 +7,11 @@ import NotFoundPage from "./components/NotFoundPage";
 import ProductPage from "./components/ProductPage";
 
 const GlobalStyles = createGlobalStyle`${css`
-  @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Raleway&family=Roboto+Condensed&display=swap");
 
   :root {
     --c-primary-dark: #419056;
     --c-primary: #5ece7b;
-    --c-primary-light: #7ed795;
     --c-primary-transparent: #5ece7b80;
     --c-text: #1d1f22;
     --c-gray-light: #eee;
@@ -26,6 +25,7 @@ const GlobalStyles = createGlobalStyle`${css`
     margin: 0;
     padding: 0;
     border: none;
+    color: var(--c-text);
   }
 
   a {

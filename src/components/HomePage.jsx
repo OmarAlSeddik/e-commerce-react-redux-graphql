@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import useProducts from "../../hooks/useProducts";
-import { cartActions } from "../../store/cartSlice";
+import useProducts from "../hooks/useProducts";
+import { cartActions } from "../store/cartSlice";
 
 const StyledPage = styled.div`
   padding: 5rem 5%;

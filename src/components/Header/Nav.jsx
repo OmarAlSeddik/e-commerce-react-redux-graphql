@@ -16,7 +16,6 @@ const StyledNav = styled.nav`
     padding: 0 1rem;
     line-height: 1.2rem;
     cursor: pointer;
-    color: var(--c-text);
     display: flex;
     align-items: center;
     justify-content: center;
