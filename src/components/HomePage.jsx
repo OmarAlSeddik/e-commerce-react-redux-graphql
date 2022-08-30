@@ -118,9 +118,11 @@ const HomePage = () => {
 
   const currency = useSelector((state) => state.currency);
   const category = useSelector((state) => state.category);
+
   const { productsLoading, productsData, productsError } = useProducts(
     category.text
   );
+
   if (productsLoading) return <h1>Loading...</h1>;
   if (productsError) return <h1>Error...</h1>;
   const products = productsData.category.products;

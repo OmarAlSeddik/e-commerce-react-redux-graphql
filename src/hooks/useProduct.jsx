@@ -17,9 +17,11 @@ const useProduct = (id) => {
           amount
         }
         attributes {
+          id
           name
           type
           items {
+            id
             displayValue
             value
           }

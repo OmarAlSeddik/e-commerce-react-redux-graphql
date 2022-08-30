@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useSelector } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import useProduct from "../hooks/useProduct";
+import { cartActions } from "../store/cartSlice";
 import NotFoundPage from "./NotFoundPage";
 
 const StyledPage = styled.div`
@@ -154,10 +155,12 @@ const ProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const { id } = useParams();
   const { productLoading, productData, productError } = useProduct(id);
+  const dispatch = useDispatch();
+  const addToCart = () => dispatch(cartActions.addToCart(id));
+
   if (productLoading) return <div>Loading...</div>;
   if (productError) return <div>Error...</div>;
   if (!productData) return <NotFoundPage />;
-  console.log(productData);
 
   const handleImageSelection = (value) => {
     setSelectedImage(value);
@@ -176,15 +179,17 @@ const ProductPage = () => {
     );
   });
 
-  const attributes = productData.attributes.map((attribute) => {
+  const attributes = productData.attributes.map((attribute, attributeIndex) => {
     return (
-      <div className="attribute-container">
+      <div className="attribute-container" key={attribute.id}>
         <div className="attribute-name">{attribute.name}</div>
         <div className="attribute-item-container">
-          {attribute.items.map((item) => (
+          {attribute.items.map((item, itemIndex) => (
             <div
+              key={item.id}
               className={`attribute-item
                 ${attribute.type === "text" ? "text" : "swatch"}
+                ${itemIndex === 0 ? "selected" : ""}
               `}
               style={
                 attribute.type === "swatch"
@@ -199,6 +204,10 @@ const ProductPage = () => {
       </div>
     );
   });
+
+  const createMarkup = () => {
+    return { __html: productData.description };
+  };
 
   return (
     <StyledPage>
@@ -223,8 +232,10 @@ const ProductPage = () => {
             {productData.prices[currency.value].amount.toFixed(2)}
           </div>
         </div>
-        <button className="button">ADD TO CART</button>
-        <p className="description">{productData.description}</p>
+        <button className="button" onClick={addToCart}>
+          ADD TO CART
+        </button>
+        <p className="description" dangerouslySetInnerHTML={createMarkup()} />
       </div>
     </StyledPage>
   );

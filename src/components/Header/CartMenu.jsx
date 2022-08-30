@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledCartMenu = styled.div`
@@ -9,7 +10,7 @@ const StyledCartMenu = styled.div`
   flex-direction: column;
   background-color: white;
   box-shadow: var(--box-shadow);
-  width: 20rem;
+  width: 20.3125rem;
   padding: 2rem 1rem;
   gap: 2rem;
 
@@ -23,9 +24,14 @@ const StyledCartMenu = styled.div`
   }
 
   .button {
-    padding: 1rem 2rem;
+    flex: 1;
+    padding: 1rem 1.75rem;
     cursor: pointer;
     transition: background-color 0.2s, border-color 0.2s;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.05rem;
+    text-align: center;
   }
 
   .view-bag-button {
@@ -56,6 +62,7 @@ const StyledCartMenu = styled.div`
 
 const CartMenu = (props) => {
   const cartMenuOpen = props.cartMenuOpen;
+  const handleToggleCartMenu = props.handleToggleCartMenu;
   const currency = useSelector((state) => state.currency);
   const cart = useSelector((state) => state.cart);
   let totalCost = 0;
@@ -76,7 +83,13 @@ const CartMenu = (props) => {
         </div>
       </div>
       <div className="buttons-container">
-        <button className="button view-bag-button">VIEW BAG</button>
+        <Link
+          to="/cart"
+          className="button view-bag-button"
+          onClick={handleToggleCartMenu}
+        >
+          VIEW BAG
+        </Link>
         <button className="button check-out-button">CHECK OUT</button>
       </div>
     </StyledCartMenu>

@@ -34,7 +34,10 @@ const Header = () => {
       <Logo />
       <Currency />
       <Cart handleToggleCartMenu={handleToggleCartMenu} />
-      <CartMenu cartMenuOpen={cartMenuOpen} />
+      <CartMenu
+        handleToggleCartMenu={handleToggleCartMenu}
+        cartMenuOpen={cartMenuOpen}
+      />
     </StyledHeader>
   );
 };
