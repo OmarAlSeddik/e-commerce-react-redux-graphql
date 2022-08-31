@@ -5,27 +5,25 @@ const useProduct = (id) => {
     query {
       product(id: "${id}") {
         id
-        brand
         name
+        inStock
         gallery
         description
-        prices {
-          currency {
-            label
-            symbol
-          }
-          amount
-        }
+        category
         attributes {
           id
           name
           type
           items {
-            id
             displayValue
             value
+            id
           }
         }
+        prices {
+          amount
+        }
+        brand
       }
     }
   `;

@@ -114,7 +114,6 @@ const StyledPage = styled.div`
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const addToCart = (id) => dispatch(cartActions.addToCart(id));
 
   const currency = useSelector((state) => state.currency);
   const category = useSelector((state) => state.category);
@@ -134,7 +133,10 @@ const HomePage = () => {
         key={product.id}
       >
         <div className="stock-text">OUT OF STOCK</div>
-        <div className="cart-button" onClick={() => addToCart(product.id)}>
+        <div
+          className="cart-button"
+          onClick={() => dispatch(cartActions.addToCart([product, 0, 0, 0]))}
+        >
           <svg
             className="cart-icon"
             viewBox="0 0 20 19"

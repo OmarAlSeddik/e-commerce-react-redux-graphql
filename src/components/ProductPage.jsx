@@ -156,7 +156,21 @@ const ProductPage = () => {
   const { id } = useParams();
   const { productLoading, productData, productError } = useProduct(id);
   const dispatch = useDispatch();
-  const addToCart = () => dispatch(cartActions.addToCart(id));
+  const [attributeValues, setAttributeValues] = useState({ 0: 0, 1: 0, 2: 0 });
+  const handleAttributeChange = (attribute, value) => {
+    setAttributeValues((prev) => ({ ...prev, [attribute]: value }));
+  };
+
+  const addToCart = () => {
+    dispatch(
+      cartActions.addToCart([
+        productData,
+        attributeValues[0],
+        attributeValues[1],
+        attributeValues[2],
+      ])
+    );
+  };
 
   if (productLoading) return <div>Loading...</div>;
   if (productError) return <div>Error...</div>;
@@ -189,13 +203,18 @@ const ProductPage = () => {
               key={item.id}
               className={`attribute-item
                 ${attribute.type === "text" ? "text" : "swatch"}
-                ${itemIndex === 0 ? "selected" : ""}
+                ${
+                  attributeValues[attributeIndex] === itemIndex
+                    ? "selected"
+                    : ""
+                }
               `}
               style={
                 attribute.type === "swatch"
                   ? { backgroundColor: item.value }
                   : {}
               }
+              onClick={() => handleAttributeChange(attributeIndex, itemIndex)}
             >
               {attribute.type === "text" ? item.value : ""}
             </div>
