@@ -58,6 +58,44 @@ const StyledCartMenu = styled.div`
     justify-content: space-between;
     font-weight: bold;
   }
+
+  .item-container {
+    display: flex;
+    height: 12rem;
+  }
+
+  .details-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand {
+    font-weight: 300;
+    line-height: 160%;
+  }
+
+  .name {
+    font-weight: 300;
+    line-height: 160%;
+  }
+
+  .price {
+    font-weight: 500;
+    line-height: 160%;
+  }
+
+  .quantity-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .quantity-button {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: solid 1px var(--c-text);
+  }
 `;
 
 const CartMenu = (props) => {
@@ -65,13 +103,35 @@ const CartMenu = (props) => {
   const handleToggleCartMenu = props.handleToggleCartMenu;
   const currency = useSelector((state) => state.currency);
   const cart = useSelector((state) => state.cart);
+  const items = Object.values(cart.items);
   let totalCost = 0;
 
-  const renderedItems = <div></div>;
+  const renderedItems = items.map((item) => {
+    return (
+      <div className="item-container" key={item.product.id}>
+        <div className="details-container">
+          <div className="brand">{item.product.brand}</div>
+          <div className="name">{item.product.name}</div>
+          <div className="price">
+            {currency.symbol}
+            {item.product.prices[currency.value].amount.toFixed(2)}
+          </div>
+        </div>
+        <div className="quantity-container">
+          <button className="quantity-button">+</button>
+          <div className="quantity">{item.quantity}</div>
+          <button className="quantity-button">-</button>
+        </div>
+        <div className="image-container">
+          <img src={item.product.gallery[0]} alt={item.product.id}></img>
+        </div>
+      </div>
+    );
+  });
 
   return (
     <StyledCartMenu style={cartMenuOpen ? {} : { display: "none" }}>
-      <div className="quantity-container">
+      <div className="total-quantity-container">
         <b>My Bag,</b> {cart.quantity} items
       </div>
       {renderedItems}
