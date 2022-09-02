@@ -13,6 +13,8 @@ const StyledCartMenu = styled.div`
   width: 20.3125rem;
   padding: 2rem 1rem;
   gap: 2rem;
+  height: 20rem;
+  overflow-y: scroll;
 
   .hidden {
     display: none;
@@ -31,7 +33,9 @@ const StyledCartMenu = styled.div`
     font-weight: 600;
     font-size: 0.875rem;
     line-height: 1.05rem;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .view-bag-button {
@@ -96,6 +100,59 @@ const StyledCartMenu = styled.div`
     height: 1.5rem;
     border: solid 1px var(--c-text);
   }
+
+  .rendered-items-container {
+    flex: 1;
+  }
+
+  .attribute-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .attribute-item-container {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .attribute-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .attribute-name {
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: "Roboto Condensed", sans-serif;
+  }
+
+  .text {
+    border: solid 1px var(--c-text);
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.125rem;
+  }
+
+  .text.selected {
+    background-color: var(--c-text);
+    color: white;
+  }
+
+  .swatch {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .swatch.selected {
+    border: solid 1px white;
+    outline: solid 1px var(--c-primary);
+  }
 `;
 
 const CartMenu = (props) => {
@@ -107,23 +164,60 @@ const CartMenu = (props) => {
   let totalCost = 0;
 
   const renderedItems = items.map((item) => {
+    const product = item.product;
+    const key = item.key;
+    const quantity = item.quantity;
+    const attributesArray = [item.attribute1, item.attribute2, item.attribute3];
+
+    const attributes = product.attributes.map((attribute, attributeIndex) => {
+      return (
+        <div className="attribute-container" key={attribute.id}>
+          <div className="attribute-name">{attribute.name}</div>
+          <div className="attribute-item-container">
+            {attribute.items.map((item, itemIndex) => (
+              <div
+                key={item.id}
+                className={`attribute-item
+                  ${attribute.type === "text" ? "text" : "swatch"}
+                  ${
+                    attributesArray[attributeIndex] === itemIndex
+                      ? "selected"
+                      : ""
+                  }
+                `}
+                style={
+                  attribute.type === "swatch"
+                    ? { backgroundColor: item.value }
+                    : {}
+                }
+                onClick={() => {}}
+              >
+                {attribute.type === "text" ? item.value : ""}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    });
+
     return (
-      <div className="item-container" key={item.product.id}>
+      <div className="item-container" key={key}>
         <div className="details-container">
-          <div className="brand">{item.product.brand}</div>
-          <div className="name">{item.product.name}</div>
+          <div className="brand">{product.brand}</div>
+          <div className="name">{product.name}</div>
           <div className="price">
             {currency.symbol}
             {item.product.prices[currency.value].amount.toFixed(2)}
           </div>
+          <div className="attributes-container">{attributes}</div>
         </div>
         <div className="quantity-container">
           <button className="quantity-button">+</button>
-          <div className="quantity">{item.quantity}</div>
+          <div className="quantity">{quantity}</div>
           <button className="quantity-button">-</button>
         </div>
         <div className="image-container">
-          <img src={item.product.gallery[0]} alt={item.product.id}></img>
+          <img src={product.gallery[0]} alt={product.id}></img>
         </div>
       </div>
     );
@@ -134,7 +228,7 @@ const CartMenu = (props) => {
       <div className="total-quantity-container">
         <b>My Bag,</b> {cart.quantity} items
       </div>
-      {renderedItems}
+      <div className="rendered-items-container">{renderedItems}</div>
       <div className="total-container">
         <div>Total</div>
         <div>

@@ -12,11 +12,18 @@ const cartSlice = createSlice({
       const attribute1 = action.payload[1];
       const attribute2 = action.payload[2];
       const attribute3 = action.payload[3];
-      const productKey = `${product.id}-${attribute1}-${attribute2}-${attribute3}`;
-      if (!state.items[productKey]) {
-        state.items[productKey] = { product, quantity: 1 };
+      const key = `${product.id}-${attribute1}-${attribute2}-${attribute3}`;
+      if (!state.items[key]) {
+        state.items[key] = {
+          product,
+          key,
+          attribute1,
+          attribute2,
+          attribute3,
+          quantity: 1,
+        };
       } else {
-        state.items[productKey].quantity++;
+        state.items[key].quantity++;
       }
     },
     removeFromCart(state, action) {
@@ -24,10 +31,10 @@ const cartSlice = createSlice({
       const attribute1 = action.payload[1];
       const attribute2 = action.payload[2];
       const attribute3 = action.payload[3];
-      const productKey = `${product.id}-${attribute1}-${attribute2}-${attribute3}`;
-      state.items[productKey].quantity--;
+      const key = `${product.id}-${attribute1}-${attribute2}-${attribute3}`;
+      state.items[key].quantity--;
       state.quantity--;
-      if (state.items[productKey] === 0) delete state[productKey];
+      if (state.items[key] === 0) delete state[key];
     },
     // For debugging purposes only
     resetState(state) {
