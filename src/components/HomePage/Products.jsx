@@ -1,27 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import useProducts from "../hooks/useProducts";
-import { cartActions } from "../store/cartSlice";
 
-const StyledPage = styled.div`
-  padding: 5rem 5%;
-
-  .category-name {
-    text-transform: capitalize;
-    padding: 2rem 0;
-  }
-
-  .products-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
+const StyledProducts = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 
   @media (max-width: 1475px) {
-    .products-container {
-      justify-content: center;
-    }
+    justify-content: center;
   }
 
   .product-container {
@@ -112,18 +99,8 @@ const StyledPage = styled.div`
   }
 `;
 
-const HomePage = () => {
+const Products = ({ productsData, cartActions, currency }) => {
   const dispatch = useDispatch();
-
-  const currency = useSelector((state) => state.currency);
-  const category = useSelector((state) => state.category);
-
-  const { productsLoading, productsData, productsError } = useProducts(
-    category.text
-  );
-
-  if (productsLoading) return <h1>Loading...</h1>;
-  if (productsError) return <h1>Error...</h1>;
   const products = productsData.category.products;
 
   const renderedProducts = products.map((product) => {
@@ -176,12 +153,7 @@ const HomePage = () => {
     );
   });
 
-  return (
-    <StyledPage>
-      <h1 className="category-name">{productsData.category.name} </h1>
-      <div className="products-container">{renderedProducts}</div>
-    </StyledPage>
-  );
+  return <StyledProducts>{renderedProducts}</StyledProducts>;
 };
 
-export default HomePage;
+export default Products;
