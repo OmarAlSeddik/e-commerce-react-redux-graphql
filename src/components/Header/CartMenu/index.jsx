@@ -13,7 +13,7 @@ const StyledCartMenu = styled.div`
   flex-direction: column;
   background-color: white;
   box-shadow: var(--box-shadow);
-  width: 20.3125rem;
+  width: 20rem;
   padding: 2rem 1rem;
   gap: 2rem;
   height: 20rem;

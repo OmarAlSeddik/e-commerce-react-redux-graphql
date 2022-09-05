@@ -1,18 +1,66 @@
 import styled from "styled-components";
 
 const StyledItems = styled.div`
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 
   .item-container {
     display: flex;
-    height: 12rem;
+    gap: 1rem;
+  }
+
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 50%;
+  }
+
+  .quantity-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 10%;
+  }
+
+  .quantity-button {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: solid 1px var(--c-text);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .quantity-button:hover {
+    transform: scale(1.2);
+  }
+
+  .image-container {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .image-container > img {
+    width: 100%;
+    height: auto;
+  }
+
+  .attributes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .attribute-container {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
   }
 
   .attribute-item-container {
@@ -50,23 +98,11 @@ const StyledItems = styled.div`
     line-height: 160%;
   }
 
-  .quantity-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .quantity-button {
-    width: 1.5rem;
-    height: 1.5rem;
-    border: solid 1px var(--c-text);
-  }
-
   .text {
     border: solid 1px var(--c-text);
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 0.875rem;
     line-height: 1.125rem;
   }
 
@@ -76,18 +112,13 @@ const StyledItems = styled.div`
   }
 
   .swatch {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   .swatch.selected {
     border: solid 1px white;
-    outline: solid 1px var(--c-primary);
-  }
-
-  .details-container {
-    display: flex;
-    flex-direction: column;
+    outline: solid 2px var(--c-primary);
   }
 `;
 
@@ -138,7 +169,9 @@ const Items = ({ items, currency }) => {
             {currency.symbol}
             {item.product.prices[currency.value].amount.toFixed(2)}
           </div>
-          <div className="attributes-container">{attributes}</div>
+          {product.attributes.length > 0 ? (
+            <div className="attributes-container">{attributes}</div>
+          ) : null}
         </div>
         <div className="quantity-container">
           <button className="quantity-button">+</button>
